@@ -64,7 +64,7 @@ export default {
 
     eventBus.$on('switchScreenIfAnswerWasCorrect', (isCorrect, currentResults) => {
 
-      if (currentResults.questionRound === 5) {
+      if (currentResults.questionRound === 25) {
         this.message = 'Game ended';
         this.status = 'ENDED';
       } else {
@@ -77,7 +77,7 @@ export default {
     });
 
     eventBus.$on('switchScreen', (questionRound) => {
-      this.currentComponent = (questionRound !== 30) ? 'Quiz' : 'StartMenu';
+      this.currentComponent = (questionRound !== 25) ? 'Quiz' : 'StartMenu';
     });
 
   }

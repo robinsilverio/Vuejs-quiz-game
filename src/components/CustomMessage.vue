@@ -40,7 +40,7 @@
                 }
             },
             isGameEnded : function () {
-                return this.results.questionRound === 5;
+                return this.results.questionRound === 25;
             }
         },
         methods : {

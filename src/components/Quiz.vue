@@ -103,7 +103,7 @@
                 return {
                     amountCorrectAnsweredQuestions: this.points,
                     questionRound: this.questionRound,
-                    percentage: this.points / this.countries.length * 100 + '%'
+                    percentage: (this.points / this.questionRound * 100).toFixed(2) + '%'
                 };
 
             }
@@ -112,7 +112,6 @@
         created() {
 
             this.loadQuestionAndAnswers();
-
             // This handles the transition to other component based on correctness of the answer.
             eventBus.$on('questionHasBeenAnswered', (answer) => {
                 eventBus.switchScreenBasedOnIfAnswerWasCorrect(this.checkAnswer(answer), this.obtainResults());
@@ -120,19 +119,7 @@
                     this.loadQuestionAndAnswers();
                 }, 200);
             });
-
         }
-        // updated() {
-        //     if(this.questionRound === 5) {
-        //         console.log('Hello');
-        //         let resultObject = {
-        //             amountCorrectAnsweredQuestions : this.points,
-        //             totalQuestions : this.countries.length,
-        //             percentage : this.points / this.countries.length * 100 + '%'
-        //         };
-        //         eventBus.$emit('gameEnded', resultObject);
-        //     }
-        // }
     }
 </script>
 
