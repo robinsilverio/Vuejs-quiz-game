@@ -8,8 +8,8 @@ export const eventBus = new Vue({
     startGame(firstName) {
       this.$emit('gameHasStarted', true, firstName);
     },
-    switchScreenBasedOnIfAnswerWasCorrect(isCorrect, questionRound, currentResults) {
-      this.$emit('switchScreenIfAnswerWasCorrect', isCorrect, questionRound, currentResults);
+    switchScreenBasedOnIfAnswerWasCorrect(isCorrect) {
+      this.$emit('switchScreenIfAnswerWasCorrect', isCorrect);
     }
   }
 });

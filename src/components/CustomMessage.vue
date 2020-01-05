@@ -40,12 +40,12 @@
                 }
             },
             isGameEnded : function () {
-                return this.results.questionRound === 25;
+                return this.gameStatus === 'ENDED';
             }
         },
         methods : {
             switchScreen() {
-                eventBus.$emit('switchScreen', this.results.questionRound);
+                eventBus.$emit('switchScreen');
             }
         }
     }

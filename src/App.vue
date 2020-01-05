@@ -25,6 +25,8 @@ export default {
       currentComponent : 'StartMenu',
       gameStarted : false,
       playerName : '',
+      points : 0,
+      questionRound : 0,
       message : 'Your score',
       results: {},
       status : ''
@@ -38,11 +40,12 @@ export default {
   },
   computed : {
     currentProperties : function () {
-      let properties = '';
+      let properties = {};
       if (this.currentComponent === 'Quiz') {
         properties = {
           gameStarted : this.gameStarted,
-          playerName : this.playerName
+          playerName : this.playerName,
+          updateQuestionRound : this.questionRound
         }
       }
       else if (this.currentComponent === 'CustomMessage') {
@@ -53,6 +56,16 @@ export default {
         }
       }
       return properties;
+    },
+    gameEnded : function () {
+      return this.questionRound === 25;
+    }
+  },
+  methods : {
+    clearData() {
+      this.playerName = '';
+      this.points = 0;
+      this.questionRound = 0;
     }
   },
   created() {
@@ -62,24 +75,39 @@ export default {
       this.currentComponent = 'Quiz';
     });
 
-    eventBus.$on('switchScreenIfAnswerWasCorrect', (isCorrect, currentResults) => {
+    eventBus.$on('switchScreenIfAnswerWasCorrect', (isCorrect) => {
 
-      if (currentResults.questionRound === 25) {
-        this.message = 'Game ended';
-        this.status = 'ENDED';
-      } else {
-        this.message = (isCorrect) ? 'That\'s correct!!' : 'That\'s incorrect!!';
-        this.status = (isCorrect) ? 'CORRECT' : 'INCORRECT';
-      }
+      this.questionRound++;
 
-      this.results = currentResults;
+      this.message =
+              (isCorrect && this.gameEnded || !isCorrect && this.gameEnded) ? 'Game ended':
+              (isCorrect) ? 'That\'s correct!!' : 'That\'s incorrect!!';
+
+      this.status =
+              (isCorrect && this.gameEnded || !isCorrect && this.gameEnded) ? 'ENDED':
+              (isCorrect) ? 'CORRECT' : 'INCORRECT';
+
+      if (isCorrect)
+        this.points++;
+
+      this.results = {
+        amountCorrectAnsweredQuestions : this.points,
+        questionRound : this.questionRound,
+        percentage : (this.points / this.questionRound * 100).toFixed(2) + '%'
+      };
       this.currentComponent = 'CustomMessage';
     });
 
-    eventBus.$on('switchScreen', (questionRound) => {
-      this.currentComponent = (questionRound !== 25) ? 'Quiz' : 'StartMenu';
-    });
+    eventBus.$on('switchScreen', () => {
 
+      this.currentComponent = (this.gameEnded) ? 'StartMenu' : 'Quiz';
+
+      // If the game finishes, clear all player stats
+      if (this.gameEnded) {
+        console.log('This game is finished');
+        this.clearData();
+      }
+    });
   }
 }
 </script>

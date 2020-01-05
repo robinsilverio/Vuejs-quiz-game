@@ -43,9 +43,7 @@
                     new Country('Mexico', 'Ciudad del Mexico')
                 ],
                 question : '',
-                questionRound : 0,
-                possibleAnswers: [],
-                points : 0
+                possibleAnswers: []
             }
         },
         props : {
@@ -56,11 +54,21 @@
             playerName : {
                 type : String,
                 default: 'Unknown'
+            },
+            updateQuestionRound : {
+                type : Number,
+                default : 0
+            }
+        },
+        watch : {
+            updateQuestionRound: function () {
+                // On update question round, then load a new question plus generating another possible answers.
+                this.loadQuestionAndAnswers();
             }
         },
         methods : {
             generateRandomQuestion() {
-                return this.countries[this.questionRound];
+                return this.countries[this.updateQuestionRound];
             },
             generatePossibleAnswers(){
 
@@ -92,20 +100,9 @@
                 let isCorrect = false;
 
                 if (answer === this.question.capital) {
-                    this.points++;
                     isCorrect = true;
                 }
-                this.questionRound++;
                 return isCorrect;
-            },
-            obtainResults() {
-
-                return {
-                    amountCorrectAnsweredQuestions: this.points,
-                    questionRound: this.questionRound,
-                    percentage: (this.points / this.questionRound * 100).toFixed(2) + '%'
-                };
-
             }
         },
         components: {AnswerOverview, Question},
@@ -114,10 +111,7 @@
             this.loadQuestionAndAnswers();
             // This handles the transition to other component based on correctness of the answer.
             eventBus.$on('questionHasBeenAnswered', (answer) => {
-                eventBus.switchScreenBasedOnIfAnswerWasCorrect(this.checkAnswer(answer), this.obtainResults());
-                setTimeout(() => {
-                    this.loadQuestionAndAnswers();
-                }, 200);
+                eventBus.switchScreenBasedOnIfAnswerWasCorrect(this.checkAnswer(answer));
             });
         }
     }
