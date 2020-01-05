@@ -104,7 +104,6 @@ export default {
 
       // If the game finishes, clear all player stats
       if (this.gameEnded) {
-        console.log('This game is finished');
         this.clearData();
       }
     });
