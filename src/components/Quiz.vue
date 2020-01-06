@@ -73,19 +73,20 @@
             generatePossibleAnswers(){
 
                 let maximumPossibleAnswers = 3;
+                let tmp_list = [];
 
                 // Populate the array with possible answers
                 for (let i = 0; i < maximumPossibleAnswers; i++) {
-                    this.possibleAnswers.add(this.countries[Math.floor(Math.random() * this.countries.length)].capital);
+                    tmp_list.push(this.countries[Math.floor(Math.random() * this.countries.length)].capital);
                 }
 
                 // Add a correct answer to possible answers array.
-                this.possibleAnswers.add(this.question.capital);
+                tmp_list.push(this.question.capital);
 
                 // In order to make user difficult to play, let's shuffle.
-                // this.shuffle(this.possibleAnswers);
+                this.shuffle(tmp_list);
 
-                return this.possibleAnswers;
+                return new Set(tmp_list);
             },
             shuffle(array) {
                 array.sort(() => Math.random() - 0.5);
