@@ -43,7 +43,7 @@
                     new Country('Mexico', 'Ciudad del Mexico')
                 ],
                 question : '',
-                possibleAnswers: []
+                possibleAnswers: new Set()
             }
         },
         props : {
@@ -76,14 +76,14 @@
 
                 // Populate the array with possible answers
                 for (let i = 0; i < maximumPossibleAnswers; i++) {
-                    this.possibleAnswers.push(this.countries[Math.floor(Math.random() * this.countries.length)].capital);
+                    this.possibleAnswers.add(this.countries[Math.floor(Math.random() * this.countries.length)].capital);
                 }
 
                 // Add a correct answer to possible answers array.
-                this.possibleAnswers.push(this.question.capital);
+                this.possibleAnswers.add(this.question.capital);
 
                 // In order to make user difficult to play, let's shuffle.
-                this.shuffle(this.possibleAnswers);
+                // this.shuffle(this.possibleAnswers);
 
                 return this.possibleAnswers;
             },
@@ -91,7 +91,7 @@
                 array.sort(() => Math.random() - 0.5);
             },
             loadQuestionAndAnswers() {
-                this.possibleAnswers = [];
+                this.possibleAnswers = new Set();
                 this.question = this.generateRandomQuestion();
                 this.possibleAnswers = this.generatePossibleAnswers();
             },

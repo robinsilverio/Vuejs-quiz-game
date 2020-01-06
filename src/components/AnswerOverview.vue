@@ -13,7 +13,7 @@
         name: "AnswerOverview",
         props : {
             possibleAnswers : {
-                type : Array
+                type : Set
             }
         },
         methods : {
