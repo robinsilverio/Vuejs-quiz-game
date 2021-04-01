@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header title="Capital quiz game"/>
+    <Header title="Capital quiz game" :game-started="gameStarted" :points="points"/>
     <hr>
     <!--Dynamic gamecomponent-->
     <transition name="flip" mode="out-in">

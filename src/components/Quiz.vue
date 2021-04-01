@@ -1,95 +1,69 @@
 <template>
- <div class="container-fluid quiz-container">
-     <Question :question="question.name"></Question>
-     <AnswerOverview :possibleAnswers="possibleAnswers"></AnswerOverview>
- </div>
+    <div class="container-fluid quiz-container">
+        <Question :question="question.name"></Question>
+        <AnswerOverview :possibleAnswers="possibleAnswers"></AnswerOverview>
+    </div>
 </template>
 
 <script>
     import Question from "@/components/Question";
     import AnswerOverview from "@/components/AnswerOverview";
-    import {Country} from "@/models/Country";
     import {eventBus} from "@/main";
+    import {countries} from "@/data";
 
     export default {
         name: "Quiz",
-        data () {
+        data() {
             return {
-                countries : [
-                    new Country('Sweden', 'Stockholm'),
-                    new Country('The Netherlands', 'Amsterdam'),
-                    new Country('Portugal', 'Lisbon'),
-                    new Country('Italy', 'Rome'),
-                    new Country('Turkey', 'Ankara'),
-                    new Country('Germany', 'Berlin'),
-                    new Country('Russia', 'Moscow'),
-                    new Country('Brazil', 'Brasilia'),
-                    new Country('Argentina', 'Buenos Aires'),
-                    new Country('South Africa', 'Pretoria'),
-                    new Country('England', 'London'),
-                    new Country('Norway', 'Oslo'),
-                    new Country('China', 'Beijing'),
-                    new Country('Algeria', 'Algiers'),
-                    new Country('Australia', 'Canberra'),
-                    new Country('Georgia', 'Tblissi'),
-                    new Country('Nepal', 'Kathmandu'),
-                    new Country('Canada', 'Ottawa'),
-                    new Country('Bolivia', 'Sucre'),
-                    new Country('Senegal', 'Dakar'),
-                    new Country('Finland', 'Helsinki'),
-                    new Country('Japan', 'Tokyo'),
-                    new Country('USA', 'Washington DC'),
-                    new Country('Chile', 'Santiago'),
-                    new Country('Mexico', 'Ciudad del Mexico')
-                ],
-                question : '',
+                questions: countries,
+                question: '',
                 possibleAnswers: new Set()
             }
         },
-        props : {
+        props: {
             gameStarted: {
-                type : Boolean,
-                default : false
+                type: Boolean,
+                default: false
             },
-            playerName : {
-                type : String,
+            playerName: {
+                type: String,
                 default: 'Unknown'
             },
-            updateQuestionRound : {
-                type : Number,
-                default : 0
+            updateQuestionRound: {
+                type: Number,
+                default: 0
             }
         },
-        watch : {
+        watch: {
             updateQuestionRound: function () {
                 // On update question round, then load a new question plus generating another possible answers.
                 this.loadQuestionAndAnswers();
             }
         },
-        methods : {
+        methods: {
             generateRandomQuestion() {
-                return this.countries[this.updateQuestionRound];
+                return this.questions[this.updateQuestionRound];
             },
-            generatePossibleAnswers(){
+            generatePossibleAnswers() {
 
                 let maximumPossibleAnswers = 3;
                 let tmp_list = [];
 
                 // Populate the array with possible answers
                 for (let i = 0; i < maximumPossibleAnswers; i++) {
-                    tmp_list.push(this.countries[Math.floor(Math.random() * this.countries.length)].capital);
+                    tmp_list.push(this.questions[Math.floor(Math.random() * this.questions.length)].capital);
                 }
 
                 // Add a correct answer to possible answers array.
                 tmp_list.push(this.question.capital);
 
-                // In order to make user difficult to play, let's shuffle.
-                this.shuffle(tmp_list);
+                // In order to make user difficult to play, let's shuffle the questions.
+                tmp_list = this.shuffleQuestions(tmp_list);
 
                 return new Set(tmp_list);
             },
-            shuffle(array) {
-                array.sort(() => Math.random() - 0.5);
+            shuffleQuestions(array) {
+                return array.sort(() => Math.random() - 0.5);
             },
             loadQuestionAndAnswers() {
                 this.possibleAnswers = new Set();
@@ -97,13 +71,7 @@
                 this.possibleAnswers = this.generatePossibleAnswers();
             },
             checkAnswer(answer) {
-
-                let isCorrect = false;
-
-                if (answer === this.question.capital) {
-                    isCorrect = true;
-                }
-                return isCorrect;
+                return answer === this.question.capital;
             }
         },
         components: {AnswerOverview, Question},
@@ -119,7 +87,7 @@
 </script>
 
 <style scoped>
-    .quiz-container{
+    .quiz-container {
         width: 70%;
         margin: auto;
         border: 1px solid #eee;

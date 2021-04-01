@@ -7,10 +7,10 @@
 <script>
     export default {
         name: "Question",
-        props : {
-            question : {
+        props: {
+            question: {
                 type: String,
-                default : ''
+                default: ''
             }
         }
     }
@@ -22,6 +22,7 @@
         background-color: #eee;
         padding: 10px;
     }
+
     .question-header h2 {
         margin: 0;
         font-weight: bold;

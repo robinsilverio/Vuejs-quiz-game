@@ -4,16 +4,16 @@ import App from './App.vue'
 Vue.config.productionTip = false;
 
 export const eventBus = new Vue({
-  methods : {
-    startGame(firstName) {
-      this.$emit('gameHasStarted', true, firstName);
-    },
-    switchScreenBasedOnIfAnswerWasCorrect(isCorrect) {
-      this.$emit('switchScreenIfAnswerWasCorrect', isCorrect);
+    methods: {
+        startGame(firstName) {
+            this.$emit('gameHasStarted', true, firstName);
+        },
+        switchScreenBasedOnIfAnswerWasCorrect(isCorrect) {
+            this.$emit('switchScreenIfAnswerWasCorrect', isCorrect);
+        }
     }
-  }
 });
 
 new Vue({
-  render: h => h(App),
+    render: h => h(App),
 }).$mount('#app')

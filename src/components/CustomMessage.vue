@@ -1,7 +1,8 @@
 <template>
     <div class="alert custom-alert" :class="status">
         <h2>{{message}}</h2>
-        <p v-if="isGameEnded">You had {{results.amountCorrectAnsweredQuestions}} of {{results.questionRound}} questions good, which gives you a percentage of {{this.results.percentage}}</p>
+        <p v-if="isGameEnded">You had {{results.amountCorrectAnsweredQuestions}} of {{results.questionRound}} questions
+            good, which gives you a percentage of {{this.results.percentage}}</p>
         <hr>
         <button class="btn btn-primary" @click="switchScreen">{{(isGameEnded) ? 'Start again' : 'Continue'}}</button>
     </div>
@@ -12,38 +13,38 @@
 
     export default {
         name: "CustomMessage",
-        props : {
-            message : {
-                type : String
+        props: {
+            message: {
+                type: String
             },
-            results : {
-                type : Object,
-                default : function () {
+            results: {
+                type: Object,
+                default: function () {
                     return {
-                        amountCorrectAnsweredQuestions : 'aaa',
-                        questionRound : 0,
-                        percentage : 0 + '%'
+                        amountCorrectAnsweredQuestions: 'aaa',
+                        questionRound: 0,
+                        percentage: 0 + '%'
                     }
                 }
             },
-            gameStatus : {
-                type : String,
-                validator : (val) => ['INCORRECT', 'CORRECT', 'ENDED'].includes(val)
+            gameStatus: {
+                type: String,
+                validator: (val) => ['INCORRECT', 'CORRECT', 'ENDED'].includes(val)
             }
         },
-        computed : {
-            status : function () {
+        computed: {
+            status: function () {
                 return {
-                    'alert-success' : this.gameStatus === 'CORRECT',
-                    'alert-danger' : this.gameStatus === 'INCORRECT',
-                    'alert-info' : this.gameStatus === 'ENDED'
+                    'alert-success': this.gameStatus === 'CORRECT',
+                    'alert-danger': this.gameStatus === 'INCORRECT',
+                    'alert-info': this.gameStatus === 'ENDED'
                 }
             },
-            isGameEnded : function () {
+            isGameEnded: function () {
                 return this.gameStatus === 'ENDED';
             }
         },
-        methods : {
+        methods: {
             switchScreen() {
                 eventBus.$emit('switchScreen');
             }

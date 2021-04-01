@@ -1,7 +1,9 @@
 <template>
     <div class="container">
         <ul class="answer-list">
-            <li class="list-item" v-for="(answer, index) in possibleAnswers" :key="index" @click="answerQuestion(answer)">{{answer}}</li>
+            <li class="list-item" v-for="(answer, index) in possibleAnswers" :key="index"
+                @click="answerQuestion(answer)">{{answer}}
+            </li>
         </ul>
     </div>
 </template>
@@ -11,12 +13,12 @@
 
     export default {
         name: "AnswerOverview",
-        props : {
-            possibleAnswers : {
-                type : Set
+        props: {
+            possibleAnswers: {
+                type: Set
             }
         },
-        methods : {
+        methods: {
             answerQuestion(answer) {
                 eventBus.$emit('questionHasBeenAnswered', answer);
             }
@@ -33,7 +35,7 @@
     .answer-list {
         list-style: none;
         padding: 0;
-     }
+    }
 
     .answer-list li {
         background: #286090;
