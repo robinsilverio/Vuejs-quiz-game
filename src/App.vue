@@ -17,6 +17,7 @@ import Quiz from "@/components/Quiz";
 import CustomMessage from "@/components/CustomMessage";
 import StartMenu from "@/components/StartMenu";
 import {eventBus} from "@/main";
+import {countries} from "@/data";
 
 export default {
   name: 'app',
@@ -29,7 +30,8 @@ export default {
       questionRound : 0,
       message : 'Your score',
       results: {},
-      status : ''
+      status : '',
+      question: countries
     };
   },
   components: {
@@ -58,7 +60,7 @@ export default {
       return properties;
     },
     gameEnded : function () {
-      return this.questionRound === 25;
+      return this.questionRound === this.question.length;
     }
   },
   methods : {
