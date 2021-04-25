@@ -13,7 +13,10 @@
         name: "StartMenu",
         methods : {
             startGame() {
-                let firstName = prompt('Insert your username');
+                let firstName = "";
+                while (firstName === "") {
+                    firstName = prompt('Insert your username');
+                }
                 eventBus.startGame(firstName);
             }
         }
