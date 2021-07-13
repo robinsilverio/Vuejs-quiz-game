@@ -126,38 +126,14 @@ export default {
 </script>
 
 <style>
+  @import "styles/transition_styles.css";
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     margin-top: 60px;
-  }
-
-  .flip-enter-active {
-    animation: flip-in 0.2s ease-out forwards;
-  }
-
-  .flip-leave-active {
-    animation: flip-out 0.2s ease-out forwards;
-  }
-
-  @keyframes flip-in {
-    from {
-      transform: rotateY(90deg);
-    }
-    to {
-      transform: rotateY(0deg);
-    }
-  }
-
-  @keyframes flip-out {
-    from {
-      transform: rotateY(0deg);
-    }
-    to {
-      transform: rotateY(90deg);
-    }
   }
 
 </style>
