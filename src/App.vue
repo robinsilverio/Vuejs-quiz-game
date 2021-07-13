@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header title="Capital quiz game" :game-started="gameStarted" :points="points"/>
+    <Header title="Quiz game" :game-started="gameStarted" :points="points"/>
     <hr>
     <!--Dynamic gamecomponent-->
     <transition name="flip" mode="out-in">
@@ -13,9 +13,10 @@
 
 <script>
 import Header from "@/components/Header";
+import StartMenu from "@/components/StartMenu";
+import ScreenSelectGameMode from "@/components/ScreenSelectGameMode";
 import Quiz from "@/components/Quiz";
 import CustomMessage from "@/components/CustomMessage";
-import StartMenu from "@/components/StartMenu";
 import {eventBus} from "@/main";
 import {questions} from "@/data";
 
@@ -37,6 +38,7 @@ export default {
   components: {
     Header,
     StartMenu,
+    ScreenSelectGameMode,
     Quiz,
     CustomMessage
   },
@@ -48,6 +50,11 @@ export default {
           gameStarted : this.gameStarted,
           playerName : this.playerName,
           updateQuestionRound : this.questionRound
+        }
+      }
+      else if (this.currentComponent === 'ScreenSelectGameMode') {
+        properties = {
+          playerName : this.playerName
         }
       }
       else if (this.currentComponent === 'CustomMessage') {
@@ -75,6 +82,11 @@ export default {
       this.gameStarted = status;
       this.playerName = firstName;
       this.currentComponent = 'Quiz';
+    });
+
+    eventBus.$on('switchToSelectGameMode', (firstName) => {
+      this.playerName = firstName;
+      this.currentComponent = 'ScreenSelectGameMode';
     });
 
     eventBus.$on('switchScreenIfAnswerWasCorrect', (isCorrect) => {

@@ -2,6 +2,7 @@
     <transition name="fade" mode="out-in">
         <div class="container-fluid menu-container">
             <button class="btn btn-primary" @click="startGame">Start the game</button>
+
         </div>
     </transition>
 </template>
@@ -17,7 +18,7 @@
                 while (firstName === "") {
                     firstName = prompt('Insert your username');
                 }
-                eventBus.startGame(firstName);
+                eventBus.switchToSelectGameMode(firstName);
             }
         }
     }

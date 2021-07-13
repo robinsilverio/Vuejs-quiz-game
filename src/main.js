@@ -8,9 +8,12 @@ export const eventBus = new Vue({
         startGame(firstName) {
             this.$emit('gameHasStarted', true, firstName);
         },
+        switchToSelectGameMode(firstName) {
+            this.$emit("switchToSelectGameMode", firstName);
+        },
         switchScreenBasedOnIfAnswerWasCorrect(isCorrect) {
             this.$emit('switchScreenIfAnswerWasCorrect', isCorrect);
-        }
+        },
     }
 });
 
