@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid quiz-container">
-        <Question :question="question.name"></Question>
+        <Question :question="question.questionText"></Question>
         <AnswerOverview :possibleAnswers="possibleAnswers"></AnswerOverview>
     </div>
 </template>
@@ -9,13 +9,13 @@
     import Question from "@/components/Question";
     import AnswerOverview from "@/components/AnswerOverview";
     import {eventBus} from "@/main";
-    import {countries} from "@/data";
+    import {questions} from "@/data";
 
     export default {
         name: "Quiz",
         data() {
             return {
-                questions: countries,
+                questions: questions,
                 question: '',
                 possibleAnswers: new Set()
             }
@@ -51,11 +51,11 @@
 
                 // Populate the array with possible answers
                 for (let i = 0; i < maximumPossibleAnswers; i++) {
-                    tmp_list.push(this.questions[Math.floor(Math.random() * this.questions.length)].capital);
+                    tmp_list.push(this.questions[Math.floor(Math.random() * this.questions.length)].answer);
                 }
 
                 // Add a correct answer to possible answers array.
-                tmp_list.push(this.question.capital);
+                tmp_list.push(this.question.answer);
 
                 // In order to make user difficult to play, let's shuffle the questions.
                 tmp_list = this.shuffleQuestions(tmp_list);
@@ -71,7 +71,7 @@
                 this.possibleAnswers = this.generatePossibleAnswers();
             },
             checkAnswer(answer) {
-                return answer === this.question.capital;
+                return answer === this.question.answer;
             }
         },
         components: {AnswerOverview, Question},

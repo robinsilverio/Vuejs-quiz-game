@@ -17,7 +17,7 @@ import Quiz from "@/components/Quiz";
 import CustomMessage from "@/components/CustomMessage";
 import StartMenu from "@/components/StartMenu";
 import {eventBus} from "@/main";
-import {countries} from "@/data";
+import {questions} from "@/data";
 
 export default {
   name: 'app',
@@ -31,7 +31,7 @@ export default {
       message : 'Your score',
       results: {},
       status : '',
-      question: countries
+      question: questions
     };
   },
   components: {

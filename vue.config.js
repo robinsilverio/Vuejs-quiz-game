@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath : '/Vuejs-practice-capital-quiz-game/'
+    publicPath : '/Vuejs-quiz-game/'
 };
