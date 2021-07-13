@@ -87,11 +87,5 @@
 </script>
 
 <style scoped>
-    .quiz-container {
-        width: 70%;
-        margin: auto;
-        border: 1px solid #eee;
-        border-radius: 5px;
-        padding: 0;
-    }
+    @import "../styles/containers_styles.css";
 </style>

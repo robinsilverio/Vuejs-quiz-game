@@ -19,6 +19,8 @@
 </script>
 
 <style scoped>
+    @import "../styles/containers_styles.css";
+
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s;
     }
