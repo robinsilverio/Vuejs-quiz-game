@@ -17,14 +17,5 @@
 </script>
 
 <style scoped>
-    .question-header {
-        text-align: center;
-        background-color: #eee;
-        padding: 10px;
-    }
 
-    .question-header h2 {
-        margin: 0;
-        font-weight: bold;
-    }
 </style>

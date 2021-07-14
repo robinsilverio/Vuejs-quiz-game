@@ -1,0 +1,31 @@
+.header {
+    text-align: center;
+}
+.question-header {
+    text-align: center;
+    background-color: #eee;
+    padding: 10px;
+}
+
+h3 {
+    margin: 40px 0 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+a {
+    color: #42b983;
+}
+
+.question-header h2 {
+    margin: 0;
+    font-weight: bold;
+}
