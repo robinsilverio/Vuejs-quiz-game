@@ -127,6 +127,9 @@ export default {
 
 <style>
   @import "styles/transition_styles.css";
+  @import "styles/headers_styles.css";
+  @import "styles/containers_styles.css";
+  @import "styles/list.css";
 
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

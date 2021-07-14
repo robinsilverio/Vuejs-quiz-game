@@ -87,6 +87,5 @@
 </script>
 
 <style scoped>
-    @import "../styles/headers_styles.css";
-    @import "../styles/containers_styles.css";
+
 </style>

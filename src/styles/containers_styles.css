@@ -11,4 +11,10 @@
 
 .quiz-selection-container {
     width: 50%;
+    text-align: center;
+}
+
+.answer-container {
+    width: 100%;
+    padding: 15px;
 }
