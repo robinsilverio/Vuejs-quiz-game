@@ -18,7 +18,7 @@ import ScreenSelectGameMode from "@/components/ScreenSelectGameMode";
 import Quiz from "@/components/Quiz";
 import CustomMessage from "@/components/CustomMessage";
 import {eventBus} from "@/main";
-import {questions} from "@/data";
+import {useLoadQuestions} from "@/firebase";
 
 export default {
   name: 'app',
@@ -32,7 +32,7 @@ export default {
       message : 'Your score',
       results: {},
       status : '',
-      question: questions
+      questions: useLoadQuestions()
     };
   },
   components: {
@@ -67,7 +67,7 @@ export default {
       return properties;
     },
     gameEnded : function () {
-      return this.questionRound === this.question.length;
+      return this.questionRound === this.questions.length;
     }
   },
   methods : {
@@ -78,6 +78,7 @@ export default {
     }
   },
   created() {
+    console.log(this.questions);
     eventBus.$on('gameHasStarted', (status, firstName) => {
       this.gameStarted = status;
       this.playerName = firstName;

@@ -8,7 +8,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@vue/composition-api": "^1.0.2",
     "core-js": "^3.4.4",
+    "firebase": "^8.7.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
@@ -31,7 +33,14 @@
     ],
     "rules": {
       "no-console": "off",
-      "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
+      "no-unused-vars": [
+        "error",
+        {
+          "vars": "all",
+          "args": "after-used",
+          "ignoreRestSiblings": false
+        }
+      ],
       "no-restricted-syntax": [
         "error",
         {
