@@ -18,7 +18,7 @@ import ScreenSelectGameMode from "@/components/ScreenSelectGameMode";
 import Quiz from "@/components/Quiz";
 import CustomMessage from "@/components/CustomMessage";
 import {eventBus} from "@/main";
-import {useLoadQuestions} from "@/firebase";
+import {useLoadQuestions} from "@/questionsDataService";
 
 export default {
   name: 'app',

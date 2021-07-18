@@ -12,18 +12,4 @@ const config = {
 };
 
 const firebaseApp = firebase.initializeApp(config);
-const db = firebaseApp.firestore();
-
-export const questionCollections = db.collection("geographyquestions");
-
-export const useLoadQuestions = () => {
-    let questionsData = [];
-
-    questionCollections.get().then((querySnapshot) => {
-       querySnapshot.forEach((doc) => {
-           questionsData.push(doc.data());
-       });
-    });
-
-    return questionsData;
-};
+export const db = firebaseApp.firestore();
