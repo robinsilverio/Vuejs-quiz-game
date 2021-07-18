@@ -28,7 +28,7 @@
         },
         methods : {
             selectTheme() {
-                eventBus.startGame(true, this.playerName);
+                eventBus.startGame(this.playerName);
             }
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <div class="question-header">
-        <h2 class="question-header-title">Capital of {{ question }}</h2>
+        <h2 class="question-header-title">{{ question }}</h2>
     </div>
 </template>
 

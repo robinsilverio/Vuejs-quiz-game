@@ -49,7 +49,8 @@ export default {
         properties = {
           gameStarted : this.gameStarted,
           playerName : this.playerName,
-          updateQuestionRound : this.questionRound
+          updateQuestionRound : this.questionRound,
+          questions: this.questions
         }
       }
       else if (this.currentComponent === 'ScreenSelectGameMode') {
@@ -78,9 +79,9 @@ export default {
     }
   },
   created() {
-    eventBus.$on('gameHasStarted', (status, firstName) => {
-      this.gameStarted = status;
-      this.playerName = firstName;
+    eventBus.$on('gameHasStarted', (data) => {
+      this.gameStarted = data.status;
+      this.playerName = data.playerName;
       this.currentComponent = 'Quiz';
     });
 

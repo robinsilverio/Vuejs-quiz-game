@@ -9,13 +9,11 @@
     import Question from "@/components/Question";
     import AnswerOverview from "@/components/AnswerOverview";
     import {eventBus} from "@/main";
-    import {questions} from "@/data";
 
     export default {
         name: "Quiz",
         data() {
             return {
-                questions: questions,
                 question: '',
                 possibleAnswers: new Set()
             }
@@ -32,7 +30,11 @@
             updateQuestionRound: {
                 type: Number,
                 default: 0
-            }
+            },
+            questions: {
+                type: Array,
+                default: () => []
+            },
         },
         watch: {
             updateQuestionRound: function () {
