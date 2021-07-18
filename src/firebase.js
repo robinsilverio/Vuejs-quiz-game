@@ -1,5 +1,4 @@
 import firebase from "firebase";
-import { ref, onUnmounted } from '@vue/composition-api';
 
 const config = {
     apiKey: "AIzaSyDEV-ZAubBU2hhmBNLaYNd42xVRBbRgqPs",
@@ -14,13 +13,17 @@ const config = {
 
 const firebaseApp = firebase.initializeApp(config);
 const db = firebaseApp.firestore();
-const questionCollections = db.collection("geographyquestions");
+
+export const questionCollections = db.collection("geographyquestions");
 
 export const useLoadQuestions = () => {
-    const questions = ref([]);
-    const close = questionCollections.onSnapshot(snapshot => {
-        questions.value = snapshot.docs.map(doc => ({ id : doc.id, ...doc.data() }));
+    let questionsData = [];
+
+    questionCollections.get().then((querySnapshot) => {
+       querySnapshot.forEach((doc) => {
+           questionsData.push(doc.data());
+       });
     });
-    onUnmounted(close);
-    return questions;
+
+    return questionsData;
 };

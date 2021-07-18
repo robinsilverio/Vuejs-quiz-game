@@ -32,7 +32,7 @@ export default {
       message : 'Your score',
       results: {},
       status : '',
-      questions: useLoadQuestions()
+      questions: useLoadQuestions(),
     };
   },
   components: {
@@ -78,7 +78,6 @@ export default {
     }
   },
   created() {
-    console.log(this.questions);
     eventBus.$on('gameHasStarted', (status, firstName) => {
       this.gameStarted = status;
       this.playerName = firstName;
