@@ -26,7 +26,6 @@ export default {
     return {
       currentComponent : 'StartMenu',
       gameStarted : false,
-      playerName : '',
       points : 0,
       questionRound : 0,
       message : 'Your score',
@@ -48,14 +47,8 @@ export default {
       if (this.currentComponent === 'Quiz') {
         properties = {
           gameStarted : this.gameStarted,
-          playerName : this.playerName,
           updateQuestionRound : this.questionRound,
           questions: this.questions
-        }
-      }
-      else if (this.currentComponent === 'ScreenSelectGameMode') {
-        properties = {
-          playerName : this.playerName
         }
       }
       else if (this.currentComponent === 'CustomMessage') {
@@ -73,7 +66,6 @@ export default {
   },
   methods : {
     clearData() {
-      this.playerName = '';
       this.points = 0;
       this.questionRound = 0;
     }
@@ -81,12 +73,10 @@ export default {
   created() {
     eventBus.$on('gameHasStarted', (data) => {
       this.gameStarted = data.status;
-      this.playerName = data.playerName;
       this.currentComponent = 'Quiz';
     });
 
-    eventBus.$on('switchToSelectGameMode', (firstName) => {
-      this.playerName = firstName;
+    eventBus.$on('switchToSelectGameMode', () => {
       this.currentComponent = 'ScreenSelectGameMode';
     });
 
@@ -117,7 +107,7 @@ export default {
 
       this.currentComponent = (this.gameEnded) ? 'StartMenu' : 'Quiz';
 
-      // If the game finishes, clear all player stats
+      // If the game finishes, clear all data
       if (this.gameEnded) {
         this.clearData();
       }

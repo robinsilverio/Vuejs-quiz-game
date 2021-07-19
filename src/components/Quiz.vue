@@ -23,10 +23,6 @@
                 type: Boolean,
                 default: false
             },
-            playerName: {
-                type: String,
-                default: 'Unknown'
-            },
             updateQuestionRound: {
                 type: Number,
                 default: 0

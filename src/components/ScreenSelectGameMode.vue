@@ -17,10 +17,6 @@
     export default {
         name: "ScreenSelectGameMode",
         props: {
-            playerName : {
-                type: String,
-                default: 'Unknown'
-            },
             themes : {
                 type: Array,
                 default : () => ["Geography", "History", "Culture"]
@@ -28,7 +24,7 @@
         },
         methods : {
             selectTheme() {
-                eventBus.startGame(this.playerName);
+                eventBus.startGame();
             }
         }
     }

@@ -8,11 +8,11 @@ Vue.use(VueCompositionAPI);
 
 export const eventBus = new Vue({
     methods: {
-        startGame(firstName) {
-            this.$emit('gameHasStarted', {status: true, playerName: firstName});
+        startGame() {
+            this.$emit('gameHasStarted', {status: true});
         },
-        switchToSelectGameMode(firstName) {
-            this.$emit("switchToSelectGameMode", firstName);
+        switchToSelectGameMode() {
+            this.$emit("switchToSelectGameMode");
         },
         switchScreenBasedOnIfAnswerWasCorrect(isCorrect) {
             this.$emit('switchScreenIfAnswerWasCorrect', isCorrect);
