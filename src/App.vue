@@ -14,7 +14,7 @@
 <script>
 import Header from "@/components/Header";
 import StartMenu from "@/components/StartMenu";
-import ScreenSelectGameMode from "@/components/ScreenSelectGameMode";
+import ScreenSelectTheme from "@/components/ScreenSelectTheme";
 import Quiz from "@/components/Quiz";
 import CustomMessage from "@/components/CustomMessage";
 import {eventBus} from "@/main";
@@ -37,7 +37,7 @@ export default {
   components: {
     Header,
     StartMenu,
-    ScreenSelectGameMode,
+    ScreenSelectTheme,
     Quiz,
     CustomMessage
   },
@@ -66,6 +66,7 @@ export default {
   },
   methods : {
     clearData() {
+      this.gameStarted = false;
       this.points = 0;
       this.questionRound = 0;
     }
@@ -76,8 +77,8 @@ export default {
       this.currentComponent = 'Quiz';
     });
 
-    eventBus.$on('switchToSelectGameMode', () => {
-      this.currentComponent = 'ScreenSelectGameMode';
+    eventBus.$on('switchToSelectTheme', () => {
+      this.currentComponent = 'ScreenSelectTheme';
     });
 
     eventBus.$on('switchScreenIfAnswerWasCorrect', (isCorrect) => {

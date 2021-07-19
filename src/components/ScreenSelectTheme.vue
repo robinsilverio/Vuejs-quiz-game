@@ -15,7 +15,7 @@
     import {eventBus} from "@/main";
 
     export default {
-        name: "ScreenSelectGameMode",
+        name: "ScreenSelectTheme",
         props: {
             themes : {
                 type: Array,
