@@ -1,0 +1,20 @@
+.quiz-container, .quiz-selection-container {
+    margin: auto;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.quiz-container {
+    width: 70%;
+}
+
+.quiz-selection-container {
+    width: 50%;
+    text-align: center;
+}
+
+.answer-container {
+    width: 100%;
+    padding: 15px;
+}

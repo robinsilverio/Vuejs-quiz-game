@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header title="Capital quiz game" :game-started="gameStarted" :points="points"/>
+    <Header title="Quiz game" :game-started="gameStarted" :points="points"/>
     <hr>
     <!--Dynamic gamecomponent-->
     <transition name="flip" mode="out-in">
@@ -13,11 +13,12 @@
 
 <script>
 import Header from "@/components/Header";
+import StartMenu from "@/components/StartMenu";
+import ScreenSelectGameMode from "@/components/ScreenSelectGameMode";
 import Quiz from "@/components/Quiz";
 import CustomMessage from "@/components/CustomMessage";
-import StartMenu from "@/components/StartMenu";
 import {eventBus} from "@/main";
-import {questions} from "@/data";
+import {useLoadQuestions} from "@/questionsDataService";
 
 export default {
   name: 'app',
@@ -25,18 +26,18 @@ export default {
     return {
       currentComponent : 'StartMenu',
       gameStarted : false,
-      playerName : '',
       points : 0,
       questionRound : 0,
       message : 'Your score',
       results: {},
       status : '',
-      question: questions
+      questions: useLoadQuestions(),
     };
   },
   components: {
     Header,
     StartMenu,
+    ScreenSelectGameMode,
     Quiz,
     CustomMessage
   },
@@ -46,8 +47,8 @@ export default {
       if (this.currentComponent === 'Quiz') {
         properties = {
           gameStarted : this.gameStarted,
-          playerName : this.playerName,
-          updateQuestionRound : this.questionRound
+          updateQuestionRound : this.questionRound,
+          questions: this.questions
         }
       }
       else if (this.currentComponent === 'CustomMessage') {
@@ -60,21 +61,23 @@ export default {
       return properties;
     },
     gameEnded : function () {
-      return this.questionRound === this.question.length;
+      return this.questionRound === this.questions.length;
     }
   },
   methods : {
     clearData() {
-      this.playerName = '';
       this.points = 0;
       this.questionRound = 0;
     }
   },
   created() {
-    eventBus.$on('gameHasStarted', (status, firstName) => {
-      this.gameStarted = status;
-      this.playerName = firstName;
+    eventBus.$on('gameHasStarted', (data) => {
+      this.gameStarted = data.status;
       this.currentComponent = 'Quiz';
+    });
+
+    eventBus.$on('switchToSelectGameMode', () => {
+      this.currentComponent = 'ScreenSelectGameMode';
     });
 
     eventBus.$on('switchScreenIfAnswerWasCorrect', (isCorrect) => {
@@ -104,7 +107,7 @@ export default {
 
       this.currentComponent = (this.gameEnded) ? 'StartMenu' : 'Quiz';
 
-      // If the game finishes, clear all player stats
+      // If the game finishes, clear all data
       if (this.gameEnded) {
         this.clearData();
       }
@@ -114,38 +117,17 @@ export default {
 </script>
 
 <style>
+  @import "styles/transition_styles.css";
+  @import "styles/headers_styles.css";
+  @import "styles/containers_styles.css";
+  @import "styles/list.css";
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     margin-top: 60px;
-  }
-
-  .flip-enter-active {
-    animation: flip-in 0.2s ease-out forwards;
-  }
-
-  .flip-leave-active {
-    animation: flip-out 0.2s ease-out forwards;
-  }
-
-  @keyframes flip-in {
-    from {
-      transform: rotateY(90deg);
-    }
-    to {
-      transform: rotateY(0deg);
-    }
-  }
-
-  @keyframes flip-out {
-    from {
-      transform: rotateY(0deg);
-    }
-    to {
-      transform: rotateY(90deg);
-    }
   }
 
 </style>

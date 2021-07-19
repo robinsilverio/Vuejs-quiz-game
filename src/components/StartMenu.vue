@@ -13,11 +13,7 @@
         name: "StartMenu",
         methods : {
             startGame() {
-                let firstName = "";
-                while (firstName === "") {
-                    firstName = prompt('Insert your username');
-                }
-                eventBus.startGame(firstName);
+                eventBus.switchToSelectGameMode();
             }
         }
     }
@@ -26,14 +22,6 @@
 <style scoped>
     .menu-container {
         text-align: center;
-    }
-
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-    }
-
-    .fade-enter, .fade-leave-to {
-        opacity: 0;
     }
 
 </style>

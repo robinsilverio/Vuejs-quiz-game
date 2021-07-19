@@ -9,13 +9,11 @@
     import Question from "@/components/Question";
     import AnswerOverview from "@/components/AnswerOverview";
     import {eventBus} from "@/main";
-    import {questions} from "@/data";
 
     export default {
         name: "Quiz",
         data() {
             return {
-                questions: questions,
                 question: '',
                 possibleAnswers: new Set()
             }
@@ -25,14 +23,14 @@
                 type: Boolean,
                 default: false
             },
-            playerName: {
-                type: String,
-                default: 'Unknown'
-            },
             updateQuestionRound: {
                 type: Number,
                 default: 0
-            }
+            },
+            questions: {
+                type: Array,
+                default: () => []
+            },
         },
         watch: {
             updateQuestionRound: function () {
@@ -87,11 +85,5 @@
 </script>
 
 <style scoped>
-    .quiz-container {
-        width: 70%;
-        margin: auto;
-        border: 1px solid #eee;
-        border-radius: 5px;
-        padding: 0;
-    }
+
 </style>
