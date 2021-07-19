@@ -13,7 +13,7 @@
         name: "StartMenu",
         methods : {
             startGame() {
-                eventBus.switchToSelectGameMode();
+                eventBus.switchToSelectTheme();
             }
         }
     }
