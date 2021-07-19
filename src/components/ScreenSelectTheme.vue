@@ -19,7 +19,7 @@
         props: {
             themes : {
                 type: Array,
-                default : () => ["Geography", "History", "Culture"]
+                default : () => ["Geography"]
             }
         },
         methods : {
